@@ -2,6 +2,7 @@
 (function () {
   window.CI_CONFIG = Object.assign({}, window.CI_DATA, {
     id: 'v5',
+    hasSponsorship: true,
     tokens: {
       '--bg': '#f6f7f8', '--fg': '#101828', '--muted': '#5b6676', '--card': '#ffffff', '--line': '#dde2e9',
       '--accent': '#1f4fd8', '--accent-fg': '#ffffff', '--tile': 'rgba(31,79,216,.08)', '--tile-fg': '#1f4fd8',
@@ -13,7 +14,7 @@
   });
 
   var NAVP = [['home', 'Главная'], ['services', 'Услуги'], ['cases', 'Кейсы'], ['vendors', 'Вендоры'],
-    ['space', 'Пространство'], ['shop', 'Мерч'], ['contacts', 'Контакты']];
+    ['space', 'Пространство'], ['sponsorship', 'Спонсорство'], ['shop', 'Мерч'], ['contacts', 'Контакты']];
   function links() {
     return NAVP.map(function (n) { return '<a href="#' + n[0] + '" data-nav="' + n[0] + '">' + n[1] + '</a>'; }).join('');
   }
@@ -45,28 +46,30 @@
     /* HOME */
     '<section class="page" id="page-home">' +
       '<div class="v5-hero"><div class="wrap">' +
-        '<div>' +
-          '<span class="v5-badge">● Работаем с 2016 · Москва, «Флакон»</span>' +
-          '<h1>IT-контур и <em>кофе</em><br>из одного окна</h1>' +
-          '<p class="lead">coffeeIT — кофейня для разработчиков и IT-интегратор: разработка ПО, подбор и закупка серверов, информационная безопасность, интеграции и поддержка. Собираем инфраструктуру и держим её в рабочем состоянии.</p>' +
-          '<div class="v5-hero-cta"><a class="btn" href="#contacts" data-cta="project">Обсудить задачу</a>' +
+        '<div class="v5-hero-copy">' +
+          '<span class="v5-badge rv">● Работаем с 2016 · Москва, «Флакон»</span>' +
+          '<h1 class="rv">IT-контур и <em>кофе</em><br><span class="v5-type" data-type="из одного окна" data-speed="52">из одного окна</span><span class="v5-caret"></span></h1>' +
+          '<p class="lead rv">coffeeIT — кофейня для разработчиков и IT-интегратор: разработка ПО, подбор и закупка серверов, информационная безопасность, интеграции и поддержка. Собираем инфраструктуру и держим её в рабочем состоянии.</p>' +
+          '<div class="v5-hero-cta rv"><a class="btn" href="#contacts" data-cta="project">Обсудить задачу</a>' +
           '<a class="btn btn-ghost" href="#services" data-nav="services">Смотреть услуги</a></div>' +
           '<div class="v5-usp">' +
-            '<div><b data-count="120" data-suffix="+">120+</b><span>проектов и поставок с 2016 года</span></div>' +
-            '<div><b data-count="9" data-suffix=" лет">9 лет</b><span>средний опыт инженеров команды</span></div>' +
-            '<div><b data-count="24" data-suffix="/7">24/7</b><span>поддержка по SLA и открытая кофейня</span></div>' +
+            '<div class="rv"><b data-count="120" data-suffix="+">120+</b><span>проектов и поставок с 2016 года</span></div>' +
+            '<div class="rv"><b data-count="9" data-suffix=" лет">9 лет</b><span>средний опыт инженеров</span></div>' +
+            '<div class="rv"><b data-count="24" data-suffix="/7">24/7</b><span>поддержка по SLA и открытая кофейня</span></div>' +
           '</div>' +
         '</div>' +
-        '<div class="v5-hero-card">' +
-          '<div class="ph" style="background-image:url({{heroArt}})"></div>' +
+        '<div class="v5-hero-card rv">' +
+          '<div class="v5-hero-photo" style="background-image:url({{heroArt}})" data-parallax="10"></div>' +
           '<div class="body">' +
-            '<div class="row"><span>Сегодня открыто</span><b>08:00 – 23:00</b></div>' +
-            '<div class="row"><span>Свободных рабочих мест</span><b>7 из 24</b></div>' +
+            '<div class="row"><span>Сегодня открыто</span><b class="v5-pulse">08:00 – 23:00</b></div>' +
+            '<div class="row"><span>Свободных рабочих мест</span><b><span data-live="8" data-suffix=" из 24">8 из 24</span></b></div>' +
+            '<div class="row"><span>Гостей сейчас</span><b><span data-live="34" data-suffix=" чел.">34 чел.</span></b></div>' +
             '<div class="row"><span>Ближайший митап</span><b>Чт, 19:00</b></div>' +
             '<div class="note">«Как выбрать сервер и не пожалеть» — бесплатно, кофе включён. <a href="#contacts" data-cta="book" style="color:var(--accent)">Записаться →</a></div>' +
           '</div>' +
         '</div>' +
       '</div></div>' +
+      '<div class="v5-ticker">{{marqueeTech}}</div>' +
 
       '<div class="v5-quick"><div class="wrap">' +
         '<a href="#services" data-nav="services">{{ic:code}} Разработка ПО и сайтов</a>' +
@@ -82,11 +85,12 @@
       '</div></section>' +
 
       '<div class="v5-band"><div class="wrap">' +
-        '<div><b>99,98%</b><span>средний аптайм систем под нашим SLA</span></div>' +
-        '<div><b>11 дней</b><span>средняя поставка серверного оборудования</span></div>' +
-        '<div><b>−38%</b><span>ручных операций после интеграций</span></div>' +
-        '<div><b>0</b><span>замечаний при проверках 152-ФЗ у клиентов</span></div>' +
+        '<div class="rv"><b data-count="99.98" data-suffix="%" data-dur="1900">99,98%</b><span>средний аптайм систем под нашим SLA</span></div>' +
+        '<div class="rv"><b data-count="11" data-suffix=" дней">11 дней</b><span>средняя поставка серверного оборудования</span></div>' +
+        '<div class="rv"><b data-count="38" data-prefix="−" data-suffix="%">−38%</b><span>ручных операций после интеграций</span></div>' +
+        '<div class="rv"><b data-count="240" data-suffix="+">240+</b><span>проверок и аудитов пройдено у клиентов</span></div>' +
       '</div></div>' +
+      '<div class="v5-ticker is-light">{{marqueeOpen}}</div>' +
 
       '<section class="v5-sec"><div class="wrap">' +
         '<div class="v5-shead"><span class="k">Кейсы</span><div><h2>Проекты с измеримым результатом</h2>' +
@@ -98,7 +102,16 @@
       '<section class="v5-sec" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">' +
         '<div class="v5-shead"><span class="k">Пространство</span><div><h2>Кофейня, в которой работают</h2>' +
         '<p>Рабочие места, переговорки и площадка для митапов. Здесь же — витрина серверного железа: можно посмотреть оборудование до закупки.</p></div></div>' +
-        '<div class="v5-tabs" data-tabs><button class="is-on" data-tab="zones">Зоны и бронирование</button><button data-tab="menu">Кофейное меню</button></div>' +
+        '<div class="v5-space-grid">' +
+          '<div class="v5-space-photo rv" style="background-image:url({{photoBar}})"><span class="v5-space-cap">Бар и обжарка на месте · «Флакон»</span></div>' +
+          '<div class="v5-space-side">' +
+            '<div class="v5-live"><span class="v5-dot"></span><span>сейчас в кофейне</span><b><span data-live="34" data-suffix=" гостей">34 гостей</span></b></div>' +
+            '<div class="v5-live"><span class="v5-dot"></span><span>свободных мест</span><b><span data-live="8" data-suffix=" из 24">8 из 24</span></b></div>' +
+            '<div class="v5-live"><span class="v5-dot"></span><span>чашек за сегодня</span><b><span data-live="212">212</span></b></div>' +
+            '<a class="btn" href="#space" data-nav="space" style="margin-top:auto">Забронировать место</a>' +
+          '</div>' +
+        '</div>' +
+        '<div class="v5-tabs" data-tabs style="margin-top:26px"><button class="is-on" data-tab="zones">Зоны и бронирование</button><button data-tab="menu">Кофейное меню</button></div>' +
         '<div class="v5-panel is-on" data-panel="zones"><div class="v5-zones">{{zonesHtml}}</div>' +
           '<div style="margin-top:18px"><a class="btn" href="#space" data-nav="space">Забронировать место</a></div></div>' +
         '<div class="v5-panel" data-panel="menu">{{menuHtml}}</div>' +
@@ -113,6 +126,11 @@
       '<section class="v5-sec" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">' +
         '<div class="v5-shead"><span class="k">Мерч</span><div><h2>Корпоративный мерч coffeeIT</h2>' +
         '<p>Кружки, футболки, худи, кепки, шопперы, термокружки, блокноты и стикеры. Делаем корпоративные тиражи с логотипом заказчика.</p></div></div>' +
+        '<div class="v5-merch-strip rv">' +
+          '<div class="v5-merch-photo" style="background-image:url({{photoWear}})"></div>' +
+          '<div class="v5-merch-photo" style="background-image:url({{photoDetail}})"></div>' +
+          '<div class="v5-merch-photo is-text"><b>23 позиции</b><span>кружки, худи, кепки, шопперы, стикеры · печать и вышивка свои</span></div>' +
+        '</div>' +
         '{{shopPreview}}' +
         '<div style="margin-top:20px"><a class="btn btn-ghost" href="#shop" data-nav="shop">Весь мерч · 23 позиции →</a></div>' +
       '</div></section>' +
@@ -197,6 +215,7 @@
       '<div class="v5-page-hero"><div class="wrap"><div class="crumb">Главная / Пространство</div>' +
       '<h1>Пространство и кофейня</h1><p>24 рабочих места, три переговорки, зал на 60 человек и витрина серверного оборудования. Бронирование — онлайн.</p></div></div>' +
       '<section class="v5-sec"><div class="wrap">' +
+        '<div class="v5-space-photo rv" style="background-image:url({{photoBar}});aspect-ratio:21/7;margin-bottom:22px"><span class="v5-space-cap">Бар coffeeIT: обжарка, эспрессо и рабочие места</span></div>' +
         '<div class="v5-tabs" data-tabs><button class="is-on" data-tab="zones">Зоны и цены</button><button data-tab="menu">Меню</button><button data-tab="book">Бронирование</button></div>' +
         '<div class="v5-panel is-on" data-panel="zones"><div class="v5-zones">{{zonesHtml}}</div></div>' +
         '<div class="v5-panel" data-panel="menu">{{menuHtml}}</div>' +
@@ -213,11 +232,59 @@
       '</div></section>' +
     '</section>' +
 
+    /* SPONSORSHIP */
+    '<section class="page" id="page-sponsorship">' +
+      '<div class="v5-page-hero"><div class="wrap"><div class="crumb">Главная / Спонсорство</div>' +
+      '<h1 class="rv">Спонсорство и будущие проекты</h1>' +
+      '<p>coffeeIT растёт: рядом с кофейней и IT-практикой мы запускаем собственные проекты — игровой клуб, автомастерскую, музыкальный магазин, gamedev-студию и консольный лаунж. Партнёры получают аудиторию, площадку и место в контенте — от логотипа на стойке до со-брендинга проекта.</p>' +
+      '<div class="v5-hero-cta" style="margin-top:20px"><a class="btn" href="#contacts" data-cta="sponsor" data-topic="Спонсорство coffeeIT">Стать партнёром</a>' +
+      '<a class="btn btn-ghost" href="#sponsor-projects">Смотреть проекты</a></div>' +
+      '</div></div>' +
+
+      '<section class="v5-sec"><div class="wrap">' +
+        '<div class="sp-stats">{{sponsorStats}}</div>' +
+      '</div></section>' +
+
+      '<section class="v5-sec" id="sponsor-projects" style="padding-top:0"><div class="wrap">' +
+        '<div class="v5-shead"><span class="k">Проекты</span><div><h2>Что мы запускаем</h2>' +
+        '<p>Пять проектов в разной стадии: от концепта до разработки. У каждого — свой бюджет, свои потребности и свой пакет для партнёра.</p></div></div>' +
+        '<div class="sp-grid">{{sponsorProjects}}</div>' +
+      '</div></section>' +
+
+      '<section class="v5-sec" style="background:#fff;border-block:1px solid var(--line)"><div class="wrap">' +
+        '<div class="v5-shead"><span class="k">Пакеты</span><div><h2>Пакеты спонсорства</h2>' +
+        '<p>Базовые условия. Финальный пакет собираем под задачу: можно взять оборудование, призовой фонд, медиа или всю зону целиком.</p></div></div>' +
+        '<div class="sp-tiers">{{sponsorTiers}}</div>' +
+        '<p class="sp-note">Суммы — ориентиры для демонстрации. Финальная смета зависит от проекта, сроков и набора интеграций.</p>' +
+      '</div></section>' +
+
+      '<section class="v5-sec"><div class="wrap"><div class="v5-split rev">' +
+        '<div class="v5-faq"><h3 style="font-size:18px;margin-bottom:8px">Вопросы о спонсорстве</h3>{{sponsorFaq}}</div>' +
+        '<div class="v5-form"><h3>Обсудить спонсорство</h3><p>Расскажите, какой проект и формат интересен — пришлём медиаплан и смету.</p>' +
+          '<form class="lead-form js-lead">' +
+          '<div class="row"><input name="name" required placeholder="Имя"><input name="contact" required placeholder="Компания и контакт"></div>' +
+          '<select name="topic"><option>Спонсорство: пакет Бронза</option><option>Спонсорство: пакет Серебро</option><option>Спонсорство: пакет Золото</option><option>Спонсорство: игровой клуб</option><option>Спонсорство: автомастерская</option><option>Спонсорство: музыкальный магазин</option><option>Спонсорство: разработка игр</option><option>Спонсорство: консольный лаунж</option><option>Свой проект с coffeeIT</option></select>' +
+          '<textarea name="message" rows="4" placeholder="Что хотите поддержать и какой результат ждёте"></textarea>' +
+          '<button class="btn" type="submit">Отправить запрос</button>' +
+          '<p class="form-note">Откроется почта с готовым письмом. <span class="form-ok" hidden>Письмо сформировано.</span></p></form></div>' +
+      '</div></div></section>' +
+
+      '<section class="v5-cta"><div class="wrap">' +
+        '<div><h2>Станьте частью следующего проекта</h2><p>Ответим в течение рабочего дня и предложим формат под ваш бюджет.</p></div>' +
+        '<div><a class="btn" href="#contacts" data-cta="sponsor" data-topic="Спонсорство coffeeIT">Стать партнёром</a></div>' +
+      '</div></section>' +
+    '</section>' +
+
     /* SHOP */
     '<section class="page" id="page-shop">' +
       '<div class="v5-page-hero"><div class="wrap"><div class="crumb">Главная / Мерч</div>' +
       '<h1>Мерч coffeeIT</h1><p>23 позиции: кружки, футболки, худи, кепки, шопперы, термокружки, блокноты и стикеры. Возможны корпоративные тиражи с вашим логотипом.</p></div></div>' +
       '<section class="v5-sec"><div class="wrap">' +
+        '<div class="v5-merch-strip rv" style="margin-bottom:22px">' +
+          '<div class="v5-merch-photo" style="background-image:url({{photoWear}})"></div>' +
+          '<div class="v5-merch-photo" style="background-image:url({{photoDetail}})"></div>' +
+          '<div class="v5-merch-photo" style="background-image:url({{photoMerch}})"></div>' +
+        '</div>' +
         '<div class="v5-shopbar"><span>В наличии · доставка по Москве от 2 дней · самовывоз у бара</span>' +
         '<button class="btn btn-ghost btn-sm" data-cart-open>Открыть корзину</button></div>' +
         '{{shopHtml}}' +
